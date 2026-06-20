@@ -1,0 +1,11 @@
+.DS_Store
+
+# Per-skill local config and any file holding real names/paths.
+# Skills ship a *.example.md template; the populated copy stays local.
+**/references/config.md
+**/references/aliases.md
+
+# Generated artifacts produced by skills at runtime
+*-transcript.md
+*-synthesis.md
+*-synthesis.html
