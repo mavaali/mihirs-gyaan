@@ -6,6 +6,10 @@ A collection of **agent skills** — self-contained instruction sets that teach 
 how to do a specific job well. They're plain Markdown (`SKILL.md` + optional `references/`),
 so they work with any agent that can load skill files.
 
+> **New to this?** Start with the **[guide](./docs/start-here)** — go from "I only chat with an
+> LLM" to running skills, with a hands-on first win in ~10 minutes (no install).
+> **Just want a skill?** Jump to **[Skills](#skills)** below.
+
 ## Works with
 
 These skills are model- and host-agnostic. They've been used with:
