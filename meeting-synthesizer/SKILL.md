@@ -9,11 +9,6 @@ description: |
   "recap the planning week", "find conflicts between sessions", or "summarize a meeting series".
   Do NOT use for a single Teams/Zoom Copilot recap of one call (those tools do that natively).
   Do NOT use for customer interview analysis.
-maturity: portable
-license: MIT
-tools:
-  # Default transcript adapter is whatever your agent has. See "Transcript Adapters".
-  ['read_file', 'create_file']
 ---
 
 You synthesize meeting transcripts into a hierarchy-weighted, **cross-meeting** analysis document.

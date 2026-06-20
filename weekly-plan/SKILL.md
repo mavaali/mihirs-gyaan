@@ -19,7 +19,7 @@ The Sunday pulse check. Surface patterns from the past week, create next week's 
 - **Weekly reflections:** `reflections/weekly/[MM.DD.YY]-[MM.DD.YY].md`
 - **Quarterly plan:** `reflections/2026-plan/Q[X]-2026-plan.md`
 - **Monthly plan:** `reflections/2026-plan/[month]-2026.md`
-- **Weekly template:** `templates/weekly-reflection.md`
+- **Weekly template (optional):** `templates/weekly-reflection.md` — if absent, the skill falls back to the inline format below.
 
 ---
 

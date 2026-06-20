@@ -133,7 +133,7 @@ Review the diff for structural issues that tests don't catch.
 5. Commit messages: `<type>: <summary>` (type = feat/fix/chore/refactor/docs)
    - Final commit gets co-author trailer:
    ```
-   Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+   Co-Authored-By: Claude <noreply@anthropic.com>
    ```
 
 ---
@@ -188,3 +188,7 @@ Output the PR details (title, body, base branch, head branch) and tell the user:
 - **Date format:** `YYYY-MM-DD`
 - **Split commits for bisectability** when the diff is large enough to warrant it.
 - **The goal is: user says `/ship`, next thing they see is the review + PR URL.**
+
+---
+
+*Adapted from the `/ship` skill in [garrytan/gstack](https://github.com/garrytan/gstack) (MIT © Garry Tan). See [CREDITS](../CREDITS.md).*

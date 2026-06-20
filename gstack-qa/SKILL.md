@@ -259,3 +259,7 @@ Minimum 0 per category.
 6. **Check console after every interaction.** JS errors that don't surface visually are still bugs.
 7. **Test like a user.** Use realistic data. Walk through complete workflows end-to-end.
 8. **Depth over breadth.** 5-10 well-documented issues with evidence > 20 vague descriptions.
+
+---
+
+*Adapted from the `/qa` skill in [garrytan/gstack](https://github.com/garrytan/gstack) (MIT © Garry Tan). See [CREDITS](../CREDITS.md).*

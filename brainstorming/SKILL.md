@@ -77,8 +77,8 @@ Before finalizing, explicitly enumerate:
 
 **Implementation (if continuing):**
 - Ask: "Ready to set up for implementation?"
-- Use superpowers:using-git-worktrees to create isolated workspace
-- Use superpowers:writing-plans to create detailed implementation plan
+- Set up an isolated workspace (a fresh branch or git worktree). If your host has a dedicated skill for this (e.g. `superpowers:using-git-worktrees`), use it.
+- Write a detailed implementation plan before coding. If your host has a planning skill (e.g. `superpowers:writing-plans`), use it; otherwise write the plan to a Markdown file and work through it step by step.
 
 ## Key Principles
 
@@ -92,3 +92,7 @@ Before finalizing, explicitly enumerate:
 - **Trace all paths** - Happy path is not enough. Trace nil, empty, error, and upstream failure
 - **Incremental validation** - Present design in sections, validate each
 - **Be direct** - If the idea is bad, say so. If the scope is wrong, say so. Product thinking requires honesty, not facilitation.
+
+---
+
+*Adapted from the `brainstorming` skill in [obra/superpowers](https://github.com/obra/superpowers) (MIT © Jesse Vincent). The premise-challenge, scope-decision, and failure-mode steps were added here. See [CREDITS](../CREDITS.md).*
