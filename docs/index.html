@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mihir's Gyaan — Start Here</title>
+<meta name="description" content="Go from chatting with an LLM to running skills. A hands-on first win in ~10 minutes, no install." />
+<style>
+  :root{
+    --bg:#fbfaf7; --surface:#ffffff; --text:#1c1b19; --muted:#5f5e5a; --hint:#888780;
+    --border:rgba(0,0,0,.12); --border-strong:rgba(0,0,0,.22);
+    --accent:#534ab7; --accent-fg:#ffffff; --accent-soft:#eeedfe; --accent-text:#3c3489;
+    --code-bg:#f1efe8; --radius:12px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#16151a; --surface:#1f1e25; --text:#ece9f1; --muted:#a9a7b4; --hint:#807e8c;
+      --border:rgba(255,255,255,.14); --border-strong:rgba(255,255,255,.26);
+      --accent:#7f77dd; --accent-fg:#16151a; --accent-soft:#26215c; --accent-text:#cecbf6;
+      --code-bg:#26252c;
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7;font-size:17px;}
+  .wrap{max-width:760px;margin:0 auto;padding:2rem 1.25rem 4rem;}
+  header.site{display:flex;align-items:center;gap:10px;margin-bottom:2.5rem;}
+  header.site .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex:none;}
+  header.site span{font-size:15px;color:var(--muted);}
+  h1{font-size:30px;font-weight:600;line-height:1.25;margin:0 0 .5rem;letter-spacing:-.01em;}
+  .sub{font-size:18px;color:var(--muted);margin:0 0 2rem;}
+  h2{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--hint);margin:2.5rem 0 .75rem;}
+  h3{font-size:19px;font-weight:600;margin:0 0 .35rem;}
+  p{margin:0 0 1rem;}
+  a{color:var(--accent-text);text-decoration:none;border-bottom:1px solid transparent;}
+  a:hover{border-bottom-color:currentColor;}
+  code{background:var(--code-bg);padding:.12em .4em;border-radius:6px;font-size:.86em;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.4rem;margin:0 0 1rem;}
+  .muted{color:var(--muted);}
+  .small{font-size:14px;}
+  .seg{display:flex;gap:8px;margin:0 0 1.5rem;}
+  .seg button{flex:1;}
+  button,.btn{font:inherit;font-size:15px;cursor:pointer;background:var(--surface);color:var(--text);
+    border:1px solid var(--border-strong);border-radius:8px;padding:11px 16px;display:inline-flex;
+    align-items:center;justify-content:center;gap:8px;transition:background .12s,border-color .12s,transform .05s;}
+  button:hover,.btn:hover{background:var(--code-bg);}
+  button:active,.btn:active{transform:scale(.985);}
+  button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-text);font-weight:600;}
+  .btn-primary{background:var(--accent);color:var(--accent-fg);border-color:var(--accent);}
+  .btn-primary:hover{background:var(--accent);filter:brightness(1.07);}
+  .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem;}
+  .step-tag{font-size:13px;color:var(--muted);margin:0 0 .25rem;}
+  ol.steps{margin:0;padding-left:1.2rem;}
+  ol.steps li{margin:0 0 .6rem;}
+  .note{font-size:14px;color:var(--muted);border-left:3px solid var(--border-strong);padding:.1rem 0 .1rem .9rem;margin:1rem 0;}
+  .ex-row{display:flex;align-items:flex-start;gap:11px;padding:9px 0;border-bottom:1px solid var(--border);}
+  .ex-row:last-child{border-bottom:0;}
+  .ex-row input{margin-top:5px;width:17px;height:17px;flex:none;accent-color:var(--accent);}
+  .ex-row label{cursor:pointer;}
+  .ex-row .done{color:var(--hint);text-decoration:line-through;}
+  .prog{font-size:14px;color:var(--muted);}
+  .head-row{display:flex;justify-content:space-between;align-items:baseline;}
+  footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:14px;color:var(--muted);}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--text);color:var(--bg);
+    padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:10;}
+  .toast.show{opacity:1;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site"><span class="dot" aria-hidden="true"></span><span>Mihir's Gyaan</span></header>
+
+  <h1>From chatting to running skills</h1>
+  <p class="sub">You already chat with an LLM. Here's how to make it do real work — your first win in about 10 minutes, no install.</p>
+
+  <h2>Pick your lane</h2>
+  <div class="seg" role="group" aria-label="Choose your lane">
+    <button id="lane-code" aria-pressed="true">I write code</button>
+    <button id="lane-notes" aria-pressed="false">I work with notes</button>
+  </div>
+
+  <h2>Step 1 · your first win (no setup)</h2>
+  <div class="card">
+    <h3>Run the editing loop on a draft you have</h3>
+    <p class="muted">Copy the skill, open a chat, paste it with any draft — an email, a paragraph, a post. Watch it score your writing, change one thing, and keep or revert based on whether the score went up.</p>
+    <div class="actions">
+      <button id="copy-firstwin" class="btn-primary"><span class="lbl">Copy the skill + rubric</span></button>
+      <a class="btn" href="https://claude.ai" target="_blank" rel="noopener">Open Claude</a>
+      <a class="btn" href="https://chatgpt.com" target="_blank" rel="noopener">Open ChatGPT</a>
+    </div>
+    <p class="note">After you paste, send: <em>"Follow this SKILL.md, use the rubric, run in chat mode on my draft, one experiment at a time."</em> The first reply is a score table. Then it runs experiments — and you'll see it <strong>revert</strong> a change that doesn't help. That's the moment.</p>
+  </div>
+  <p class="small muted">The bundled rubric is calibrated to one person's blog voice — great for seeing the loop work. Later, build your own for your genre (that's the capstone below).</p>
+
+  <h2>Step 2 · go deeper</h2>
+  <div class="card">
+    <p class="step-tag" id="deeper-tag"></p>
+    <h3 id="deeper-title"></h3>
+    <p class="muted" id="deeper-body"></p>
+    <div class="actions">
+      <button id="copy-lane"><span class="lbl"></span></button>
+      <a class="btn" id="track-link" href="#" target="_blank" rel="noopener">Setup guide</a>
+    </div>
+  </div>
+
+  <h2>Step 3 · the exercises</h2>
+  <div class="card">
+    <div class="head-row"><h3 style="margin:0;">Five small wins</h3><span class="prog" id="prog">0 / 5 done</span></div>
+    <p class="muted small" style="margin:.4rem 0 1rem;">Each is self-verifiable and reversible. Your progress is saved in this browser.</p>
+    <div id="ex-list"></div>
+  </div>
+
+  <footer>
+    <p>Every skill is plain Markdown. Browse the full corpus, contribute your own, or read the longer guide on
+      <a href="https://github.com/mavaali/mihirs-gyaan" target="_blank" rel="noopener">GitHub</a>.</p>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var RAW="https://raw.githubusercontent.com/mavaali/mihirs-gyaan/main/";
+  var REPO="https://github.com/mavaali/mihirs-gyaan/tree/main/";
+  var toast=document.getElementById('toast');
+  function showToast(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(function(){toast.classList.remove('show');},2600);}
+
+  function fetchAll(paths){
+    return Promise.all(paths.map(function(p){
+      return fetch(RAW+p).then(function(r){if(!r.ok)throw new Error(p);return r.text();});
+    }));
+  }
+  function copyText(t){
+    if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(t);}
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();try{document.execCommand('copy');res();}catch(e){rej(e);}document.body.removeChild(ta);
+    });
+  }
+  function wireCopy(btn, build, okMsg){
+    btn.addEventListener('click',function(){
+      var lbl=btn.querySelector('.lbl'); var orig=lbl.textContent; lbl.textContent='Fetching…';
+      build().then(function(text){return copyText(text);}).then(function(){
+        lbl.textContent='Copied — paste into a chat'; showToast(okMsg);
+        setTimeout(function(){lbl.textContent=orig;},2600);
+      }).catch(function(){
+        lbl.textContent=orig; showToast('Couldn’t fetch — opening the file instead');
+      });
+    });
+  }
+
+  wireCopy(document.getElementById('copy-firstwin'), function(){
+    return fetchAll(['autoresearch-writing/SKILL.md','autoresearch-writing/references/rubric.waglesworld-blog.md'])
+      .then(function(parts){
+        return 'Follow the instructions in this SKILL.md. Use the rubric below. Run in CHAT MODE on my draft. '
+          +'Score it first, then do one experiment at a time and ask me before each change.\n\n'
+          +'--- SKILL.md ---\n'+parts[0]+'\n\n--- RUBRIC ---\n'+parts[1]
+          +'\n\n--- MY DRAFT ---\n(paste your draft here)';
+      });
+  }, 'Skill + rubric copied');
+
+  var lanes={
+    code:{
+      tag:'For people who write code',
+      title:'Set up a CLI agent',
+      body:'Install an agent that acts on your project — Claude Code, Codex, or any that loads a SKILL.md. Then run brainstorming before your next build: it challenges the premise before you write the wrong thing.',
+      copyLabel:'Copy the brainstorming skill',
+      paths:['brainstorming/SKILL.md'],
+      preamble:'Use this brainstorming skill. I want to build: (describe it).\n\n',
+      link:REPO+'docs/start-here/track-a-cli-agent.md',
+      ok:'brainstorming skill copied'
+    },
+    notes:{
+      tag:'For people who work with notes',
+      title:'Set up a notes vault',
+      body:'Make an Obsidian vault (a folder of Markdown). Then run causal on a recurring annoyance — it forces a five-step chain and makes you reject your first guess before naming a cause.',
+      copyLabel:'Copy the causal skill',
+      paths:['causal/SKILL.md'],
+      preamble:'Use this causal skill on my question: why does (the recurring problem) keep happening?\n\n',
+      link:REPO+'docs/start-here/track-b-notes-vault.md',
+      ok:'causal skill copied'
+    }
+  };
+  var laneBtn={code:document.getElementById('lane-code'),notes:document.getElementById('lane-notes')};
+  var dTag=document.getElementById('deeper-tag'),dTitle=document.getElementById('deeper-title'),
+      dBody=document.getElementById('deeper-body'),laneCopy=document.getElementById('copy-lane'),
+      trackLink=document.getElementById('track-link');
+  var current='code', copyHandlerSet=false;
+
+  function setLane(key){
+    current=key; var L=lanes[key];
+    laneBtn.code.setAttribute('aria-pressed',key==='code');
+    laneBtn.notes.setAttribute('aria-pressed',key==='notes');
+    dTag.textContent=L.tag; dTitle.textContent=L.title; dBody.textContent=L.body;
+    laneCopy.querySelector('.lbl').textContent=L.copyLabel; trackLink.href=L.link;
+    try{localStorage.setItem('gyaan-lane',key);}catch(e){}
+  }
+  laneBtn.code.addEventListener('click',function(){setLane('code');});
+  laneBtn.notes.addEventListener('click',function(){setLane('notes');});
+
+  laneCopy.addEventListener('click',function(){
+    var L=lanes[current], lbl=laneCopy.querySelector('.lbl'), orig=lbl.textContent; lbl.textContent='Fetching…';
+    fetchAll(L.paths).then(function(parts){return copyText(L.preamble+parts.join('\n\n'));}).then(function(){
+      lbl.textContent='Copied — paste into a chat'; showToast(L.ok);
+      setTimeout(function(){lbl.textContent=orig;},2600);
+    }).catch(function(){lbl.textContent=orig; showToast('Couldn’t fetch — see the setup guide');});
+  });
+
+  var savedLane='code'; try{savedLane=localStorage.getItem('gyaan-lane')||'code';}catch(e){}
+  setLane(savedLane);
+
+  var ex=[
+    'Notice the gap — ask a plain chat to "improve this paragraph" and name what it lacks',
+    'Run your first loop — get one KEEP and one REVERT',
+    'Pick your lane (above)',
+    'Complete your lane’s first skill on real input',
+    'Graduate — customize a rubric to your voice, or write your own one-screen skill'
+  ];
+  var list=document.getElementById('ex-list'),prog=document.getElementById('prog');
+  var state={};try{state=JSON.parse(localStorage.getItem('gyaan-ex')||'{}');}catch(e){}
+  function render(){
+    var done=0;list.innerHTML='';
+    ex.forEach(function(label,i){
+      if(state[i])done++;
+      var row=document.createElement('div');row.className='ex-row';
+      var id='ex'+i;
+      var cb=document.createElement('input');cb.type='checkbox';cb.id=id;cb.checked=!!state[i];
+      cb.addEventListener('change',function(){state[i]=cb.checked;try{localStorage.setItem('gyaan-ex',JSON.stringify(state));}catch(e){}render();});
+      var lab=document.createElement('label');lab.setAttribute('for',id);lab.textContent=(i+1)+'. '+label;
+      if(state[i])lab.className='done';
+      row.appendChild(cb);row.appendChild(lab);list.appendChild(row);
+    });
+    prog.textContent=done+' / '+ex.length+' done';
+  }
+  render();
+})();
+</script>
+</body>
+</html>
