@@ -83,6 +83,7 @@ docs/start-here/
   track-b-notes-vault.md # Obsidian; fresh-vault scaffold OR existing-vault branch;
                        #   then daily/weekly/monthly/quarterly, journal-process, notebooklm
   the-full-map.md      # whole corpus by tier + setup each needs (skills land here as rows)
+  exercises.md         # confidence tracker: aggregates every "Try this" with checkboxes
 ```
 
 **README top** gets two doors above the existing skill tables:
@@ -125,6 +126,38 @@ $VAULT_ROOT/
     notebook-source.md  dashboard.md      # notebooklm (see casing nit)
 ```
 
+### D. Confidence-building exercises (inline + tracker)
+
+Newcomers (the "friends") want concrete things to *complete*. Confidence comes from
+**verifiable wins that ratchet in difficulty** — each ends in an unambiguous "I did it"
+with a success criterion the reader checks themselves, never "you should feel more
+comfortable now." (Cross-domain pattern: Duolingo / belt progressions — small graded reps,
+each slightly harder, ending in a do-it-unaided demonstration.)
+
+**Format = both:**
+- **Inline `Try this` callouts** at the end of each page, where the learning just happened.
+- **`exercises.md` tracker** that aggregates all of them as a checkbox list, so progress is
+  visible in one place.
+
+Every exercise carries three fixed parts:
+1. **Copy-paste start** — the exact text/command to begin (no blank-page paralysis).
+2. **You'll know it worked when…** — a self-verifiable success criterion (evidence, not vibes).
+3. **Reassurance** — "you can't break anything; it's all reversible."
+
+The escalating set (one per arc stage):
+
+| # | Stage | Exercise | Success criterion |
+|---|-------|----------|-------------------|
+| 1 | Mindset | Ask a vanilla chat to "improve this paragraph" | You can name what's missing (no rubric, no discipline) |
+| 2 | First win | Run one score → one change → keep/revert loop (chat mode) on a real draft | A dimension score went up **and** you reverted one change that didn't help |
+| 3a | Coder lane | Paste `brainstorming` before a small feature | It challenged your premise at least once; you have a design doc |
+| 3b | Knowledge lane | Run `causal` on a recurring annoyance | You rejected your first guess; the cause survived the environment check |
+| 4 | Setup | Install your agent / scaffold your vault; run one skill end-to-end | A skill ran **outside** a chat box on real input |
+| 5 | Capstone (graduation) | Customize the writing rubric to your voice, or write a one-screen skill | You're authoring, not just consuming |
+
+The capstone is the graduation moment — it converts a consumer into a contributor and is the
+natural bridge to `CONTRIBUTING.md`.
+
 ## What already exists (reuse, don't rebuild)
 
 - 15 portable skills + the (to-be-added) generalized `autoresearch-writing`.
@@ -144,6 +177,11 @@ $VAULT_ROOT/
   `2-first-win.md` must script the literal paste + expected first turn, not describe it.
 - **6-month:** a new skill is new maintenance; the pluggable rubric prevents it rotting
   into your-voice-only. The two-lane structure absorbs new knowledge skills as rows.
+- **Exercise backfires:** an ambiguous or too-hard exercise *destroys* confidence instead
+  of building it. Mitigation: every exercise must be self-verifiable (criterion the reader
+  can check alone), reversible (explicit "you can't break anything"), and start from a
+  copy-paste seed (no blank page). Exercise 2's keep/revert is the riskiest — its page must
+  show a worked example score table.
 
 ## NOT in scope
 
@@ -160,6 +198,7 @@ $VAULT_ROOT/
 ## Open follow-ups (separate work)
 
 1. Generalize + import `autoresearch-writing` (skill work; precedes the first-win page).
-2. Build `docs/start-here/` pages.
-3. README top-of-file routing.
-4. (Later) vault-config refactor; year + casing nits; badges/diagram.
+2. Build `docs/start-here/` pages, each ending in a `Try this` callout.
+3. Build `exercises.md` tracker aggregating all callouts as a checklist.
+4. README top-of-file routing.
+5. (Later) vault-config refactor; year + casing nits; badges/diagram.
