@@ -68,6 +68,13 @@
   .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--text);color:var(--bg);
     padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:10;}
   .toast.show{opacity:1;}
+  .setup{margin-top:1rem;}
+  .setup .seg{margin:0 0 .9rem;}
+  .setup-intro{font-size:14px;color:var(--muted);margin:0 0 .5rem;}
+  .cmd{position:relative;background:var(--code-bg);border-radius:8px;margin:0 0 .25rem;}
+  .cmd pre{margin:0;padding:.8rem 3.4rem .8rem .9rem;overflow-x:auto;font-size:13px;line-height:1.6;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;}
+  .cmd .copy-cmd{position:absolute;top:6px;right:6px;padding:5px 10px;font-size:13px;}
 </style>
 </head>
 <body>
@@ -96,14 +103,22 @@
   </div>
   <p class="small muted">The bundled rubric is calibrated to one person's blog voice — great for seeing the loop work. Later, build your own for your genre (that's the capstone below).</p>
 
-  <h2>Step 2 · go deeper</h2>
+  <h2>Step 2 · set up your tools</h2>
   <div class="card">
     <p class="step-tag" id="deeper-tag"></p>
     <h3 id="deeper-title"></h3>
     <p class="muted" id="deeper-body"></p>
+
+    <div class="seg" id="vault-toggle" role="group" aria-label="Vault situation" style="display:none;">
+      <button id="vault-fresh" aria-pressed="true">Fresh vault</button>
+      <button id="vault-existing" aria-pressed="false">I already have one</button>
+    </div>
+
+    <div class="setup" id="setup-detail"></div>
+
     <div class="actions">
       <button id="copy-lane"><span class="lbl"></span></button>
-      <a class="btn" id="track-link" href="#" target="_blank" rel="noopener">Setup guide</a>
+      <a class="btn" id="track-link" href="#" target="_blank" rel="noopener">Full setup guide</a>
     </div>
   </div>
 
@@ -163,33 +178,67 @@
       });
   }, 'Skill + rubric copied');
 
+  function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
   var lanes={
     code:{
       tag:'For people who write code',
       title:'Set up a CLI agent',
-      body:'Install an agent that acts on your project — Claude Code, Codex, or any that loads a SKILL.md. Then run brainstorming before your next build: it challenges the premise before you write the wrong thing.',
+      body:'Install an agent that acts on your project — Claude Code, Codex, or any that loads a SKILL.md. Drop a skill folder into its skills directory, then run brainstorming before your next build.',
       copyLabel:'Copy the brainstorming skill',
       paths:['brainstorming/SKILL.md'],
       preamble:'Use this brainstorming skill. I want to build: (describe it).\n\n',
       link:REPO+'docs/start-here/track-a-cli-agent.md',
-      ok:'brainstorming skill copied'
+      ok:'brainstorming skill copied',
+      setup:function(){return [{intro:'Install a skill into your agent (Claude Code shown) — then invoke it by describing the task:',cmd:'cp -r brainstorming ~/.claude/skills/'}];}
     },
     notes:{
       tag:'For people who work with notes',
       title:'Set up a notes vault',
-      body:'Make an Obsidian vault (a folder of Markdown). Then run causal on a recurring annoyance — it forces a five-step chain and makes you reject your first guess before naming a cause.',
+      body:'Download Obsidian (free) and create a vault — that folder of Markdown is your $VAULT_ROOT. Then run causal on a recurring annoyance: it forces a five-step chain and makes you reject your first guess.',
       copyLabel:'Copy the causal skill',
       paths:['causal/SKILL.md'],
       preamble:'Use this causal skill on my question: why does (the recurring problem) keep happening?\n\n',
       link:REPO+'docs/start-here/track-b-notes-vault.md',
-      ok:'causal skill copied'
+      ok:'causal skill copied',
+      setup:function(mode){
+        if(mode==='existing'){
+          return [{intro:'Keep your structure. Point each planning skill at your folders by editing the “## Vault Paths” block at the top of its SKILL.md — no command to run.',cmd:null}];
+        }
+        return [{intro:'Create the skill-ready folders. Run this once from your vault root:',cmd:'mkdir -p fleeting literature ideas \\\n  reflections/weekly "reflections/$(date +%Y)-plan" \\\n  writing/drafts writing/ideas templates'}];
+      }
     }
   };
   var laneBtn={code:document.getElementById('lane-code'),notes:document.getElementById('lane-notes')};
   var dTag=document.getElementById('deeper-tag'),dTitle=document.getElementById('deeper-title'),
       dBody=document.getElementById('deeper-body'),laneCopy=document.getElementById('copy-lane'),
-      trackLink=document.getElementById('track-link');
-  var current='code', copyHandlerSet=false;
+      trackLink=document.getElementById('track-link'),
+      vaultToggle=document.getElementById('vault-toggle'),
+      vFresh=document.getElementById('vault-fresh'),vExisting=document.getElementById('vault-existing'),
+      setupEl=document.getElementById('setup-detail');
+  var current='code', vaultMode='fresh';
+  try{vaultMode=localStorage.getItem('gyaan-vault')||'fresh';}catch(e){}
+
+  function renderSetup(){
+    var blocks=lanes[current].setup(vaultMode), html='';
+    blocks.forEach(function(b){
+      html+='<p class="setup-intro">'+escapeHtml(b.intro)+'</p>';
+      if(b.cmd){html+='<div class="cmd"><button class="copy-cmd" aria-label="Copy command">Copy</button><pre>'+escapeHtml(b.cmd)+'</pre></div>';}
+    });
+    setupEl.innerHTML=html;
+    Array.prototype.forEach.call(setupEl.querySelectorAll('.copy-cmd'),function(btn){
+      btn.addEventListener('click',function(){
+        var pre=btn.parentNode.querySelector('pre');
+        copyText(pre.textContent).then(function(){btn.textContent='Copied';showToast('Command copied');setTimeout(function(){btn.textContent='Copy';},2000);});
+      });
+    });
+  }
+  function updateVaultBtns(){
+    vFresh.setAttribute('aria-pressed',vaultMode==='fresh');
+    vExisting.setAttribute('aria-pressed',vaultMode==='existing');
+  }
+  vFresh.addEventListener('click',function(){vaultMode='fresh';updateVaultBtns();renderSetup();try{localStorage.setItem('gyaan-vault','fresh');}catch(e){}});
+  vExisting.addEventListener('click',function(){vaultMode='existing';updateVaultBtns();renderSetup();try{localStorage.setItem('gyaan-vault','existing');}catch(e){}});
 
   function setLane(key){
     current=key; var L=lanes[key];
@@ -197,6 +246,9 @@
     laneBtn.notes.setAttribute('aria-pressed',key==='notes');
     dTag.textContent=L.tag; dTitle.textContent=L.title; dBody.textContent=L.body;
     laneCopy.querySelector('.lbl').textContent=L.copyLabel; trackLink.href=L.link;
+    vaultToggle.style.display=(key==='notes')?'flex':'none';
+    if(key==='notes')updateVaultBtns();
+    renderSetup();
     try{localStorage.setItem('gyaan-lane',key);}catch(e){}
   }
   laneBtn.code.addEventListener('click',function(){setLane('code');});
