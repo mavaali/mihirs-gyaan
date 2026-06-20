@@ -29,6 +29,11 @@ are **pure instructions** — zero setup, fully portable. A few skills assume sp
 | [brainstorming](./brainstorming) | Structured ideation before creative work — diverge, then converge, before building |
 | [requirements-builder](./requirements-builder) | Turn a feature idea into user stories with acceptance criteria, edge cases, and scope boundaries |
 
+### Writing & craft (portable; bring a rubric)
+| Skill | What it does | Needs |
+|-------|--------------|-------|
+| [autoresearch-writing](./autoresearch-writing) | Karpathy-style editing loop — score a draft on a rubric, make one change per experiment, keep or revert. Works on any writing, in a chat box or with a file-editing agent | A rubric (a worked example ships; copy [`rubric.example.md`](./autoresearch-writing/references/rubric.example.md) to make your own) |
+
 ### Dev & shipping (need a project + tooling)
 | Skill | What it does | Needs |
 |-------|--------------|-------|

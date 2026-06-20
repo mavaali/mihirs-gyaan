@@ -4,8 +4,10 @@
 # Skills ship a *.example.md template; the populated copy stays local.
 **/references/config.md
 **/references/aliases.md
+**/references/rubric.md
 
 # Generated artifacts produced by skills at runtime
 *-transcript.md
 *-synthesis.md
 *-synthesis.html
+*.snapshot-*.md

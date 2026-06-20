@@ -10,6 +10,7 @@ is acknowledged below.
 | [`brainstorming`](./brainstorming) | [obra/superpowers](https://github.com/obra/superpowers) — `brainstorming` skill | Jesse Vincent | MIT |
 | [`get-api-docs`](./get-api-docs) | [andrewyng/context-hub](https://github.com/andrewyng/context-hub) — `get-api-docs` skill (requires their `chub` CLI) | Context Hub Contributors | MIT |
 | [`gstack-browse`](./gstack-browse), [`gstack-qa`](./gstack-qa), [`gstack-ship`](./gstack-ship) | [garrytan/gstack](https://github.com/garrytan/gstack) — `/browse`, `/qa`, `/ship` | Garry Tan | MIT |
+| [`autoresearch-writing`](./autoresearch-writing) | [mavaali/autoresearch-writing](https://github.com/mavaali/autoresearch-writing), itself derived from Karpathy's [autoresearch](https://github.com/karpathy/autoresearch) + Irina Gorbach's article-editing adaptation | Mihir Wagle (loop: Andrej Karpathy; rubric discipline: Irina Gorbach) | MIT |
 
 ## What "adapted" means here
 
@@ -20,6 +21,13 @@ is acknowledged below.
   `chub` CLI and is only useful if `chub` is installed.
 - **`gstack-*`** — adapted from gstack's slash-command workflows, lightly edited for this corpus's
   conventions (kebab-case folder names, no hardcoded model strings).
+- **`autoresearch-writing`** — generalized from the upstream's blog-only loop to *any writing*:
+  the universal editing loop is separated from a **pluggable, voice-calibrated rubric**, and a
+  **chat/file dual mode** was added so it works in a plain chat box or with a file-editing agent.
+  The upstream credits Andrej Karpathy's `autoresearch` (one-change-per-experiment, keep-if-it-helps)
+  and Irina Gorbach (rubric-scored article editing as isolated hypotheses); those credits carry
+  through here. The bundled `rubric.waglesworld-blog.md` is one author's calibration — an example,
+  not a default.
 
 All other skills (`causal`, `meeting-synthesizer`, `requirements-builder`, `notebooklm`,
 `debugging-vite-apps`, `daily-process`, `weekly-plan`, `monthly-plan`, `quarterly-plan`,
