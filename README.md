@@ -65,6 +65,23 @@ are **pure instructions** — zero setup, fully portable. A few skills assume sp
 - No hardcoded personal paths, names, or org-internal tooling. Anything machine-specific is a
   `*.example.md` template the user fills in locally.
 
+### Frontmatter schema
+
+Every `SKILL.md` opens with YAML frontmatter using this schema:
+
+| Field | Required | Purpose |
+|-------|----------|---------|
+| `name` | yes | Kebab-case, matches the folder name |
+| `description` | yes | When to use the skill — the text an agent matches against |
+| `user-invocable` | no | `true` if the skill is meant to be triggered directly (e.g. as a slash command) |
+
+Keep frontmatter to these fields; put everything else (required tools, setup, adapters) in the body.
+
 ## License
 
 [MIT](./LICENSE) — use, fork, adapt freely.
+
+## Credits
+
+Some skills are adapted from other open-source projects. See [CREDITS.md](./CREDITS.md) for full
+attribution; each derived `SKILL.md` also carries an inline credit footer.

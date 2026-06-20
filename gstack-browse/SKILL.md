@@ -112,3 +112,7 @@ When using Claude in Chrome (for deployed sites without local server):
 4. **Never include real credentials in reports.** Use `[REDACTED]`.
 5. **Prefer accessibility snapshots over screenshots** for verifying content and structure. Use screenshots for visual/layout issues.
 6. **Use preview_inspect for precise style verification** — more accurate than screenshots for colors, fonts, spacing.
+
+---
+
+*Adapted from the `/browse` skill in [garrytan/gstack](https://github.com/garrytan/gstack) (MIT © Garry Tan). See [CREDITS](../CREDITS.md).*

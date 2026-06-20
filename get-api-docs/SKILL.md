@@ -83,3 +83,7 @@ Available labels: `outdated`, `inaccurate`, `incomplete`, `wrong-examples`,
 - `chub search` with no query lists everything available
 - IDs are `<author>/<name>` — confirm the ID from search before fetching
 - If multiple languages exist and you don't pass `--lang`, chub will tell you which are available
+
+---
+
+*Adapted from the `get-api-docs` skill in [andrewyng/context-hub](https://github.com/andrewyng/context-hub) (MIT © Context Hub Contributors). Requires their `chub` CLI. See [CREDITS](../CREDITS.md).*
