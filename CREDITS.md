@@ -33,4 +33,31 @@ All other skills (`causal`, `meeting-synthesizer`, `requirements-builder`, `note
 `debugging-vite-apps`, `daily-process`, `weekly-plan`, `monthly-plan`, `quarterly-plan`,
 `journal-process`) are original to this repository.
 
+## License notices
+
+The adapted skills derive from these MIT-licensed projects. Their copyright notices are
+reproduced here, as the MIT License requires:
+
+- Copyright (c) 2025 Jesse Vincent — [obra/superpowers](https://github.com/obra/superpowers)
+- Copyright (c) 2026 Context Hub Contributors — [andrewyng/context-hub](https://github.com/andrewyng/context-hub)
+- Copyright (c) 2026 Garry Tan — [garrytan/gstack](https://github.com/garrytan/gstack)
+- Copyright (c) 2026 Mihir Wagle — [mavaali/autoresearch-writing](https://github.com/mavaali/autoresearch-writing) (in turn crediting Andrej Karpathy's `autoresearch` and Irina Gorbach)
+
+The MIT permission notice below applies to each of the above:
+
+> Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+> and associated documentation files (the "Software"), to deal in the Software without
+> restriction, including without limitation the rights to use, copy, modify, merge, publish,
+> distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+> Software is furnished to do so, subject to the following conditions:
+>
+> The above copyright notice and this permission notice shall be included in all copies or
+> substantial portions of the Software.
+>
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+> BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+> NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+> DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 If you believe a skill here derives from your work and isn't credited, please open an issue.
