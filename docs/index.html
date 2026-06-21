@@ -197,12 +197,15 @@
       preamble:'Use this brainstorming skill. I want to build: (describe it).\n\n',
       link:REPO+'docs/start-here/track-a-cli-agent.md',
       ok:'brainstorming skill copied',
-      setup:function(){return [{intro:'Install a skill into your agent (Claude Code shown) — then invoke it by describing the task:',cmd:'cp -r brainstorming ~/.claude/skills/'}];}
+      setup:function(){return [{intro:'Install a skill into your agent (Claude Code shown) — then invoke it by describing the task:',cmd:{
+        mac:'cp -r brainstorming ~/.claude/skills/',
+        win:'Copy-Item -Recurse brainstorming $env:USERPROFILE\\.claude\\skills\\'
+      }}];}
     },
     notes:{
       tag:'For people who work with notes',
       title:'Set up a notes vault',
-      body:'Download Obsidian (free) and create a vault — that folder of Markdown is your $VAULT_ROOT. Then run causal on a recurring annoyance: it forces a five-step chain and makes you reject your first guess.',
+      body:'Download <a href="https://obsidian.md" target="_blank" rel="noopener">Obsidian</a> (free) and create a vault — that folder of Markdown is your <code>$VAULT_ROOT</code>. Then run causal on a recurring annoyance: it forces a five-step chain and makes you reject your first guess.',
       copyLabel:'Copy the causal skill',
       paths:['causal/SKILL.md'],
       preamble:'Use this causal skill on my question: why does (the recurring problem) keep happening?\n\n',
@@ -212,7 +215,10 @@
         if(mode==='existing'){
           return [{intro:'Keep your structure. Point each planning skill at your folders by editing the “## Vault Paths” block at the top of its SKILL.md — no command to run.',cmd:null}];
         }
-        return [{intro:'Create the skill-ready folders. Run this once from your vault root:',cmd:'mkdir -p fleeting literature ideas \\\n  reflections/weekly "reflections/$(date +%Y)-plan" \\\n  writing/drafts writing/ideas templates'}];
+        return [{intro:'Create the skill-ready folders. Run this once from your vault root:',cmd:{
+          mac:'mkdir -p fleeting literature ideas \\\n  reflections/weekly "reflections/$(date +%Y)-plan" \\\n  writing/drafts writing/ideas templates',
+          win:'$y = Get-Date -Format yyyy\n"fleeting","literature","ideas","reflections/weekly","reflections/$y-plan","writing/drafts","writing/ideas","templates" |\n  ForEach-Object { New-Item -ItemType Directory -Force $_ }'
+        }}];
       }
     }
   };
@@ -223,16 +229,27 @@
       vaultToggle=document.getElementById('vault-toggle'),
       vFresh=document.getElementById('vault-fresh'),vExisting=document.getElementById('vault-existing'),
       setupEl=document.getElementById('setup-detail');
-  var current='code', vaultMode='fresh';
+  var current='code', vaultMode='fresh', osMode='mac';
   try{vaultMode=localStorage.getItem('gyaan-vault')||'fresh';}catch(e){}
+  try{osMode=localStorage.getItem('gyaan-os')||'mac';}catch(e){}
 
   function renderSetup(){
-    var blocks=lanes[current].setup(vaultMode), html='';
+    var blocks=lanes[current].setup(vaultMode), html='', hasCmd=false;
+    blocks.forEach(function(b){if(b.cmd)hasCmd=true;});
+    if(hasCmd){
+      html+='<div class="seg os-seg" role="group" aria-label="Operating system">'
+        +'<button data-os="mac" aria-pressed="'+(osMode==='mac')+'">macOS / Linux</button>'
+        +'<button data-os="win" aria-pressed="'+(osMode==='win')+'">Windows</button></div>';
+    }
     blocks.forEach(function(b){
       html+='<p class="setup-intro">'+escapeHtml(b.intro)+'</p>';
-      if(b.cmd){html+='<div class="cmd"><button class="copy-cmd" aria-label="Copy command">Copy</button><pre>'+escapeHtml(b.cmd)+'</pre></div>';}
+      if(b.cmd){var c=b.cmd[osMode]||b.cmd.mac;
+        html+='<div class="cmd"><button class="copy-cmd" aria-label="Copy command">Copy</button><pre>'+escapeHtml(c)+'</pre></div>';}
     });
     setupEl.innerHTML=html;
+    Array.prototype.forEach.call(setupEl.querySelectorAll('.os-seg button'),function(b){
+      b.addEventListener('click',function(){osMode=b.getAttribute('data-os');try{localStorage.setItem('gyaan-os',osMode);}catch(e){}renderSetup();});
+    });
     Array.prototype.forEach.call(setupEl.querySelectorAll('.copy-cmd'),function(btn){
       btn.addEventListener('click',function(){
         var pre=btn.parentNode.querySelector('pre');
@@ -251,7 +268,7 @@
     current=key; var L=lanes[key];
     laneBtn.code.setAttribute('aria-pressed',key==='code');
     laneBtn.notes.setAttribute('aria-pressed',key==='notes');
-    dTag.textContent=L.tag; dTitle.textContent=L.title; dBody.textContent=L.body;
+    dTag.textContent=L.tag; dTitle.textContent=L.title; dBody.innerHTML=L.body;
     laneCopy.querySelector('.lbl').textContent=L.copyLabel; trackLink.href=L.link;
     vaultToggle.style.display=(key==='notes')?'flex':'none';
     if(key==='notes')updateVaultBtns();
