@@ -83,8 +83,9 @@ Every `SKILL.md` opens with YAML frontmatter using this schema:
 | `name` | yes | Kebab-case, matches the folder name |
 | `description` | yes | When to use the skill — the text an agent matches against |
 | `user-invocable` | no | `true` if the skill is meant to be triggered directly (e.g. as a slash command) |
+| `tools` | no | Tool hints for hosts that read them (e.g. `m-skill`). Optional; most skills declare tools in the body instead |
 
-Keep frontmatter to these fields; put everything else (required tools, setup, adapters) in the body.
+Keep frontmatter to these fields. Setup, adapters, and prose belong in the body.
 
 ## License
 

@@ -32,8 +32,9 @@ Re-run `notebooklm login` when cookies expire (you'll see auth errors).
 
 ### 4. Vault Setup
 
-Copy the templates from `templates/` into your vault:
-- `templates/notebook-source.md` -> `Templates/Types/notebook-source.md`
+Copy the templates from this skill's `templates/` folder into your vault. (The destination uses
+Obsidian's capitalized `Templates/` convention; the lowercase `templates/` is the source here.)
+- `templates/notebook-source.md` (source) -> `Templates/Types/notebook-source.md` (in your vault)
 - `templates/dashboard.md` -> use as reference when creating dashboards
 
 ## Quick Start
