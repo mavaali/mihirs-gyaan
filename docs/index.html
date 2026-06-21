@@ -98,6 +98,7 @@
       <button id="copy-firstwin" class="btn-primary"><span class="lbl">Copy the skill + rubric</span></button>
       <a class="btn" href="https://claude.ai" target="_blank" rel="noopener">Open Claude</a>
       <a class="btn" href="https://chatgpt.com" target="_blank" rel="noopener">Open ChatGPT</a>
+      <a class="btn" id="firstwin-fallback" style="display:none;" target="_blank" rel="noopener">Open the files on GitHub to copy</a>
     </div>
     <p class="note">After you paste, send: <em>"Follow this SKILL.md, use the rubric, run in chat mode on my draft, one experiment at a time."</em> The first reply is a score table. Then it runs experiments — and you'll see it <strong>revert</strong> a change that doesn't help. That's the moment.</p>
   </div>
@@ -119,6 +120,7 @@
     <div class="actions">
       <button id="copy-lane"><span class="lbl"></span></button>
       <a class="btn" id="track-link" href="#" target="_blank" rel="noopener">Full setup guide</a>
+      <a class="btn" id="lane-fallback" style="display:none;" target="_blank" rel="noopener">Open on GitHub to copy</a>
     </div>
   </div>
 
@@ -141,8 +143,10 @@
 (function(){
   var RAW="https://raw.githubusercontent.com/mavaali/mihirs-gyaan/main/";
   var REPO="https://github.com/mavaali/mihirs-gyaan/tree/main/";
+  var BLOB="https://github.com/mavaali/mihirs-gyaan/blob/main/";
   var toast=document.getElementById('toast');
   function showToast(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(function(){toast.classList.remove('show');},2600);}
+  function revealFallback(el,url){if(!el)return;el.href=url;el.style.display='inline-flex';}
 
   function fetchAll(paths){
     return Promise.all(paths.map(function(p){
@@ -156,14 +160,15 @@
       document.body.appendChild(ta);ta.select();try{document.execCommand('copy');res();}catch(e){rej(e);}document.body.removeChild(ta);
     });
   }
-  function wireCopy(btn, build, okMsg){
+  function wireCopy(btn, build, okMsg, onFail){
     btn.addEventListener('click',function(){
       var lbl=btn.querySelector('.lbl'); var orig=lbl.textContent; lbl.textContent='Fetching…';
       build().then(function(text){return copyText(text);}).then(function(){
         lbl.textContent='Copied — paste into a chat'; showToast(okMsg);
         setTimeout(function(){lbl.textContent=orig;},2600);
       }).catch(function(){
-        lbl.textContent=orig; showToast('Couldn’t fetch — opening the file instead');
+        lbl.textContent=orig; showToast('Couldn’t fetch automatically — use the GitHub link to copy it');
+        if(onFail)onFail();
       });
     });
   }
@@ -176,7 +181,9 @@
           +'--- SKILL.md ---\n'+parts[0]+'\n\n--- RUBRIC ---\n'+parts[1]
           +'\n\n--- MY DRAFT ---\n(paste your draft here)';
       });
-  }, 'Skill + rubric copied');
+  }, 'Skill + rubric copied', function(){
+    revealFallback(document.getElementById('firstwin-fallback'), REPO+'autoresearch-writing');
+  });
 
   function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
@@ -248,6 +255,7 @@
     laneCopy.querySelector('.lbl').textContent=L.copyLabel; trackLink.href=L.link;
     vaultToggle.style.display=(key==='notes')?'flex':'none';
     if(key==='notes')updateVaultBtns();
+    var lf=document.getElementById('lane-fallback'); if(lf)lf.style.display='none';
     renderSetup();
     try{localStorage.setItem('gyaan-lane',key);}catch(e){}
   }
@@ -259,7 +267,10 @@
     fetchAll(L.paths).then(function(parts){return copyText(L.preamble+parts.join('\n\n'));}).then(function(){
       lbl.textContent='Copied — paste into a chat'; showToast(L.ok);
       setTimeout(function(){lbl.textContent=orig;},2600);
-    }).catch(function(){lbl.textContent=orig; showToast('Couldn’t fetch — see the setup guide');});
+    }).catch(function(){
+      lbl.textContent=orig; showToast('Couldn’t fetch automatically — use the GitHub link to copy it');
+      revealFallback(document.getElementById('lane-fallback'), BLOB+L.paths[0]);
+    });
   });
 
   var savedLane='code'; try{savedLane=localStorage.getItem('gyaan-lane')||'code';}catch(e){}
