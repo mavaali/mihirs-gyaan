@@ -34,9 +34,9 @@ $VAULT_ROOT/
 ```
 
 > [!NOTE]
-> Replace `<YEAR>` with the current year (e.g. `reflections/2026-plan/`). A few planning skills
-> currently spell the year out in their paths — match it, or edit the skill's path (next
-> section) if you prefer a year-less layout.
+> Replace `<YEAR>` with the current year (e.g. `reflections/2026-plan/`). The planning skills
+> write to `reflections/[YYYY]-plan/`, where `[YYYY]` is the current year — so the scaffold and
+> the skills line up automatically.
 
 Quick create — run from your vault root.
 

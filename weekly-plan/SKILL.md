@@ -15,10 +15,11 @@ The Sunday pulse check. Surface patterns from the past week, create next week's 
 - `/weekly-plan`
 
 ## Vault Paths
+> `[YYYY]` = the current year (e.g. `2026`); `[X]` = the quarter number.
 - **Vault root:** your notes vault (set this to your own path, e.g. an Obsidian/Logseq/plain-Markdown folder). Referred to below as `$VAULT_ROOT`.
 - **Weekly reflections:** `reflections/weekly/[MM.DD.YY]-[MM.DD.YY].md`
-- **Quarterly plan:** `reflections/2026-plan/Q[X]-2026-plan.md`
-- **Monthly plan:** `reflections/2026-plan/[month]-2026.md`
+- **Quarterly plan:** `reflections/[YYYY]-plan/Q[X]-[YYYY]-plan.md`
+- **Monthly plan:** `reflections/[YYYY]-plan/[month]-[YYYY].md`
 - **Weekly template (optional):** `templates/weekly-reflection.md` — if absent, the skill falls back to the inline format below.
 
 ---

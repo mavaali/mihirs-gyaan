@@ -17,10 +17,11 @@ The quarterly sit-down that reviews the past 12 weeks, surfaces patterns from mo
 - `/quarterly-plan`
 
 ## Vault Paths
+> `[YYYY]` = the current year (e.g. `2026`); `[X]` = the quarter number.
 - **Vault root:** your notes vault (set this to your own path, e.g. an Obsidian/Logseq/plain-Markdown folder). Referred to below as `$VAULT_ROOT`.
-- **Monthly plans:** `reflections/2026-plan/[month]-2026.md`
-- **Quarterly plans:** `reflections/2026-plan/Q[X]-2026-plan.md`
-- **Annual plan:** `reflections/2026-plan/2026-plan.md`
+- **Monthly plans:** `reflections/[YYYY]-plan/[month]-[YYYY].md`
+- **Quarterly plans:** `reflections/[YYYY]-plan/Q[X]-[YYYY]-plan.md`
+- **Annual plan:** `reflections/[YYYY]-plan/[YYYY]-plan.md`
 - **Weekly reflections:** `reflections/weekly/`
 
 ---
@@ -32,7 +33,7 @@ The quarterly sit-down that reviews the past 12 weeks, surfaces patterns from mo
 #### Step 1: Gather Monthly Syntheses
 Read the 3 monthly plan files from the quarter being reviewed.
 
-Ask: "Which quarter are we reviewing? (e.g., Q1 2026 = January-March)"
+Ask: "Which quarter are we reviewing? (e.g., Q1 [YYYY] = January-March)"
 
 #### Step 2: Roll Up Patterns
 
@@ -89,7 +90,7 @@ Read the previous quarter's plan and evaluate each focus area:
 
 #### Step 5: Annual Plan Check
 
-Read `reflections/2026-plan/2026-plan.md` (if it exists).
+Read `reflections/[YYYY]-plan/[YYYY]-plan.md` (if it exists).
 
 > "Here's your annual direction. How does the next quarter serve it?"
 
@@ -120,10 +121,10 @@ Read `reflections/2026-plan/2026-plan.md` (if it exists).
 
 #### Step 8: Create Quarterly Plan File
 
-Create `reflections/2026-plan/Q[X]-2026-plan.md`:
+Create `reflections/[YYYY]-plan/Q[X]-[YYYY]-plan.md`:
 
 ```markdown
-# Q[X] 2026
+# Q[X] [YYYY]
 
 **Planning date:** [Date]
 **Status:** Active

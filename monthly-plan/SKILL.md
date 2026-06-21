@@ -17,10 +17,11 @@ The monthly sit-down that synthesizes the past month, plans content for the next
 - `/monthly-plan`
 
 ## Vault Paths
+> `[YYYY]` = the current year (e.g. `2026`); `[X]` = the quarter number.
 - **Vault root:** your notes vault (set this to your own path, e.g. an Obsidian/Logseq/plain-Markdown folder). Referred to below as `$VAULT_ROOT`.
 - **Weekly reflections:** `reflections/weekly/[MM.DD.YY]-[MM.DD.YY].md`
-- **Quarterly plan:** `reflections/2026-plan/Q[X]-2026-plan.md`
-- **Monthly plans:** `reflections/2026-plan/[month]-2026.md`
+- **Quarterly plan:** `reflections/[YYYY]-plan/Q[X]-[YYYY]-plan.md`
+- **Monthly plans:** `reflections/[YYYY]-plan/[month]-[YYYY].md`
 - **Editorial calendar:** `writing/editorial-calendar.md`
 - **Ideas inbox:** `writing/ideas/inbox.md`
 - **Drafts:** `writing/drafts/`
@@ -110,10 +111,10 @@ Update `writing/editorial-calendar.md` with assigned topics.
 
 ### Phase 4: Create Month Plan File
 
-Create `reflections/2026-plan/[month]-2026.md`:
+Create `reflections/[YYYY]-plan/[month]-[YYYY].md`:
 
 ```markdown
-# [Month] 2026
+# [Month] [YYYY]
 
 **Planning date:** [Date]
 **Status:** Active
