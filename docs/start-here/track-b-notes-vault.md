@@ -38,9 +38,17 @@ $VAULT_ROOT/
 > currently spell the year out in their paths — match it, or edit the skill's path (next
 > section) if you prefer a year-less layout.
 
-Quick create (macOS/Linux), run from your vault root:
+Quick create — run from your vault root.
+
+macOS / Linux:
 ```
 mkdir -p fleeting literature ideas reflections/weekly "reflections/$(date +%Y)-plan" writing/drafts writing/ideas templates
+```
+Windows (PowerShell):
+```
+$y = Get-Date -Format yyyy
+"fleeting","literature","ideas","reflections/weekly","reflections/$y-plan","writing/drafts","writing/ideas","templates" |
+  ForEach-Object { New-Item -ItemType Directory -Force $_ }
 ```
 
 ### Already have a structured vault → point the skills at it
