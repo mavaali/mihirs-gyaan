@@ -20,8 +20,14 @@ agent you like.
 
 1. Copy a skill folder into your agent's skills location. Start with
    [`brainstorming`](../../brainstorming):
+
+   macOS / Linux:
    ```
    cp -r brainstorming ~/.claude/skills/        # Claude Code example
+   ```
+   Windows (PowerShell):
+   ```
+   Copy-Item -Recurse brainstorming $env:USERPROFILE\.claude\skills\
    ```
 2. If the skill has a `references/*.example.md`, copy it to the non-`example` name and fill it
    in. (Populated copies stay local — they're gitignored.)
